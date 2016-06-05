@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>Twitch tv</title>
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Josefin+Sans' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body ng-controller="mainCtrl">
+<div class="app" >
+    <div id="streamer-control" class="container text-center">
+        <div class="row">
+            <div class="col-xs-12">
+                <h1>Twitch Status</h1>
+            </div>
+        </div>
+        <div id="buttons" class="row">
+            <a href="#">
+                <div id="all" class="col-xs-4" ng-class="{'selected': selected === 'all'}" ng-click="allClick()">
+                    <h3>All</h3>
+                </div>
+                <div id="online" class="col-xs-4" ng-class="{'selected': selected === 'online'}" ng-click="onlineClick()">
+                    <h3>Online</h3>
+                </div>
+                <div id="offline" class="col-xs-4" ng-class="{'selected': selected === 'offline'}" ng-click="offlineClick()">
+                    <h3>Offline</h3>
+                </div>
+            </a>
+        </div>
+        <div class="row">
+            <input id="search" type="text" class="form-control" placeholder="Search for..." value="" ng-keyup="performSearch()">
+        </div>
+    </div>
+    <div id="streamer-list" class="container">
+        <a href="{{stream.url}}" target="_blank" ng-repeat="stream in streamsDisplay">
+            <div ng-id="stream.id" class="row streamer">
+                <div class="col-xs-3">
+                    <img class="channel-logos" ng-src="{{stream.logo}}">
+                </div>
+                <div class="col-xs-7">
+                    <p class="channel-name">{{stream.name}}</p>
+                    <p ng-show="stream.description">{{stream.description}}<p>
+                </div>
+                <div class="col-xs-2">
+                    <div class="stream-status" ng-class="stream.status"></div>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
+
+
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<script src="bower_components/angular/angular.min.js"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
